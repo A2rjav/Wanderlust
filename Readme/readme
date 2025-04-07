@@ -1,0 +1,14 @@
+Most imp file is package.json that should not be deleted as node module and package-lock can be retrieved from it by command npm -i onlyy
+
+
+
+To use code of another file we need to require it in form of a variable of type const
+
+to send the data from server to web : we use get command 
+post : is used to get the data from web to server as after filling form if we make this in get command, it will show the entered data in url so we use post command
+
+we don't need ejs to require just use
+app.set("view engine", 'ejs') -> here a file named "views" is used in which ejs files are saved 
+
+app.use -> it is used to set up middleware that are always executed before any other routing command 
+to get the response from server we need to call next() to continue rest of the process
