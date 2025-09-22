@@ -74,14 +74,16 @@
     app.get("/listing/:id", wrapAsync(async (req,res)=>{
         let {id} =req.params;
         const listing=await Listing.findById(id);
-        res.render("Listings/show.ejs", {listing });
+        res.render("listings/show.ejs", {listing });
     })
 );
 
     //Create route
     app.post("/listings",wrapAsync(async(req,res,next)=>{
-        // let {title,description,price,location,country } = req.body
-        listingSchema.validate(req.body);
+        const { error } = listingSchema.validate(req.body);
+        if (error) {
+            throw new ExpressError(error.details[0].message, 400);
+        }
         console.log(req.body);
         const newlisting = new Listing(req.body.listing);
         await newlisting.save();
@@ -117,12 +119,12 @@
         next(new ExpressError(404,"page not found!")); 
     }); 
 
-    app.listen(8080, () => {
-        console.log("port:8080 connected successfully");
-    });
-
     app.use((err, req, res, next) => {
         let { statusCode = 500, message = "Something went wrong" } = err;
         res.status(statusCode).render("listings/error", { err });
+    });
+
+    app.listen(8081, () => {
+        console.log("port:8081 connected successfully");
     });
         

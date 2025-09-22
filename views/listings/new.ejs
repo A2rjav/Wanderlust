@@ -15,20 +15,20 @@
     
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="description" id="" cols="10" rows="2"  class="form-control" placeholder="enter description" required></textarea>
+        <textarea name="listing[description]" id="" cols="10" rows="2"  class="form-control" placeholder="enter description" required></textarea>
         <div class="valid-feedback">Valid</div>
         <div class="invalid-feedback">invalid feedback</div>
     </div>
 
     <div class="mb-3">
         <label for="image" class="form-label">Image URL</label>
-        <input type="text" name="listing[image]" placeholder="enter image-URL/Link" class="form-control" >
+        <input type="url" name="listing[image][url]" placeholder="enter image-URL/Link" class="form-control" >
     </div>
 
     <div class="row">
         <div class="mb-3 col-4">
             <label for="price" class="form-label">Price</label>
-            <input type="text" name="listing[price]" placeholder="1200" class="form-control" required>
+            <input type="number" name="listing[price]" placeholder="1200" class="form-control" required>
             <div class="valid-feedback"></div>
         </div>
     
