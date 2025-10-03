@@ -13,7 +13,7 @@
 
                 <div class="mb-3">
                     <label for="Image-URL" class="form-label">Image-URL/Link</label>
-                    <input name="listing[image]" class="form-control" value="<%= listing.image.url %>" type="text" required/>
+                    <input name="listing[image][url]" class="form-control" value="<%= listing.image.url %>" type="url"/>
                     <div class="invalid-feedback">enter valid url</div>
                 </div>
                 
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" name="listing[price]" value="<%= listing.price %>" placeholder="enter price" required>
+                        <input type="number" class="form-control" name="listing[price]" value="<%= listing.price %>" placeholder="enter price" required>
                         <div class="invalid-feedback">enter valid price</div>
                     </div>
                     <div class="mb-3 col-8">
