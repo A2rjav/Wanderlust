@@ -1,3 +1,7 @@
+    if(process.env.NODE_ENV !== "production") {
+        require('dotenv').config();
+    }
+
     const express = require("express");
     const app = express();
     const mongoose = require("mongoose");
@@ -43,7 +47,8 @@
     // });
 
     async function main() {
-        const db = await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust", {
+        const dbUrl = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/wanderlust";
+        const db = await mongoose.connect(dbUrl, {
         });
         console.log("connected to DB");
     }
@@ -124,7 +129,8 @@
         res.status(statusCode).render("listings/error", { err });
     });
 
-    app.listen(8081, () => {
-        console.log("port:8081 connected successfully");
+    const port = process.env.PORT || 8081;
+    app.listen(port, () => {
+        console.log(`port:${port} connected successfully`);
     });
         
