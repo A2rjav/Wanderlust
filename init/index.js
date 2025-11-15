@@ -1,5 +1,6 @@
+const path = require('path');
 if(process.env.NODE_ENV !== "production") {
-  require('dotenv').config({ path: '../.env' });
+  require('dotenv').config({ path: path.join(__dirname, '../.env') });
 }
 
 const mongoose = require("mongoose");
@@ -8,22 +9,20 @@ const Listing = require("../models/listing.js");
 
 const MONGO_URL = process.env.MONGODB_URL || "mongodb://127.0.0.1:27017/wanderlust";
 
-main()
-  .then(() => {
-    console.log("connected to DB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 async function main() {
   await mongoose.connect(MONGO_URL);
+  console.log("connected to DB");
 }
 
 const initDB = async () => {
+  await main();
   await Listing.deleteMany({});
   await Listing.insertMany(initData.data);
   console.log("data was initialized");
+  console.log(`Inserted ${initData.data.length} listings`);
+  mongoose.connection.close();
 };
 
-initDB();
+initDB().catch((err) => {
+  console.log("Error:", err);
+});
